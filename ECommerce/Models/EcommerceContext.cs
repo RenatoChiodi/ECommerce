@@ -1,0 +1,16 @@
+﻿using System.Data.Entity;
+
+namespace ECommerce.Models
+{
+    public class EcommerceContext : DbContext
+    {
+        public EcommerceContext() : base("DefaultConnection")
+        {
+
+        }
+
+        public System.Data.Entity.DbSet<ECommerce.Models.Departaments> Departaments { get; set; }
+
+        public System.Data.Entity.DbSet<ECommerce.Models.City> Cities { get; set; }
+    }
+}
