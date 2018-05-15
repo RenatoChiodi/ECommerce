@@ -1,4 +1,5 @@
-﻿using ECommerce.Models;
+﻿using ECommerce.Classes;
+using ECommerce.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -35,20 +36,9 @@ namespace ECommerce.Controllers
         // GET: Cities/Create
         public ActionResult Create()
         {   
-            //Adiciona a menssagem selecine um departamento
-            var dep = db.Departaments.ToList();
-            dep.Add(new Departaments
-            {   
-                //se tentar salvar sem selecioner irá retornar 0
-                DepartamentsId=0,
-                Name="[ Selecione um Departamento]"
+           
 
-            });
-
-            //Ordena os campos do ComboBox
-            dep=dep.OrderBy(d => d.Name).ToList();
-
-            ViewBag.DepartamentsId = new SelectList(dep, "DepartamentsId", "Name");
+            ViewBag.DepartamentsId = new SelectList(CombosHelper.GetDepartaments(), "DepartamentsId", "Name");
             return View();
         }
 
@@ -66,19 +56,9 @@ namespace ECommerce.Controllers
                 return RedirectToAction("Index");
             }
 
-            var dep = db.Departaments.ToList();
-            dep.Add(new Departaments
-            {
-                //se tentar salvar sem selecioner irá retornar 0
-                DepartamentsId = 0,
-                Name = "[ Selecione um Departamento]"
+           
 
-            });
-
-            //Ordena os campos do ComboBox
-            dep = dep.OrderBy(d => d.Name).ToList();
-
-            ViewBag.DepartamentsId = new SelectList(dep, "DepartamentsId", "Name");
+            ViewBag.DepartamentsId = new SelectList(CombosHelper.GetDepartaments(), "DepartamentsId", "Name");
             return View();
         }
 

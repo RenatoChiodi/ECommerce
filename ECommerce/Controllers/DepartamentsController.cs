@@ -107,8 +107,25 @@ namespace ECommerce.Controllers
         {
             Departaments departaments = db.Departaments.Find(id);
             db.Departaments.Remove(departaments);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (System.Exception ex)
+            {
+                //tratamento de erros na hora de excluir departamentos
+                if (ex.InnerException != null && 
+                        ex.InnerException.InnerException != null &&
+                        ex.InnerException.InnerException.Message.Contains("REFERENCE")){
+                    ModelState.AddModelError(string.Empty, "Não é possivel Mover o departamento porque exite cidades realicinadas a ele, primeiro remova as cidades e volte a excluir!");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                }
+                return View( departaments);
+            }
         }
 
         protected override void Dispose(bool disposing)
