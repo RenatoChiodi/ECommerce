@@ -47,8 +47,26 @@ namespace ECommerce.Controllers
             if (ModelState.IsValid)
             {
                 db.Departaments.Add(departaments);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (System.Exception ex)
+                {
+                    //tratamento de erros na hora de excluir departamentos
+                    if (ex.InnerException != null &&
+                            ex.InnerException.InnerException != null &&
+                            ex.InnerException.InnerException.Message.Contains("_Index"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Não é possivel Mover Inserir valores duplicados!");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, ex.Message);
+                    }
+                    return View(departaments);
+                }
             }
 
             return View(departaments);
@@ -79,8 +97,26 @@ namespace ECommerce.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(departaments).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (System.Exception ex)
+                {
+                    //tratamento de erros na hora de excluir departamentos
+                    if (ex.InnerException != null &&
+                            ex.InnerException.InnerException != null &&
+                            ex.InnerException.InnerException.Message.Contains("_Index"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Não é possivel Mover Inserir valores duplicados!");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, ex.Message);
+                    }
+                    return View(departaments);
+                }
             }
             return View(departaments);
         }

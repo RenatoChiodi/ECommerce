@@ -9,7 +9,7 @@ namespace ECommerce.Models
     public class City
     {
         [Key]
-        [Display(Name = "Cidade")]
+        [Display(Name = "Cidade ID")]
         public int CityId { get; set; }
 
         [Display(Name = "Cidade")]
@@ -22,5 +22,6 @@ namespace ECommerce.Models
         public int DepartamentsId { get; set; }
 
         public virtual Departaments Departament { get; set; }
+        public virtual ICollection<Company> Company { get; set; }
     }
 }
