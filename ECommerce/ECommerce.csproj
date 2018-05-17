@@ -202,7 +202,7 @@
     <Compile Include="Classes\CombosHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
-    <Compile Include="Controllers\CompaniessController.cs" />
+    <Compile Include="Controllers\CompaniesssController.cs" />
     <Compile Include="Controllers\DepartamentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -289,11 +289,11 @@
     <Content Include="Views\Cities\Details.cshtml" />
     <Content Include="Views\Cities\Edit.cshtml" />
     <Content Include="Views\Cities\Index.cshtml" />
-    <Content Include="Views\Companiess\Create.cshtml" />
-    <Content Include="Views\Companiess\Delete.cshtml" />
-    <Content Include="Views\Companiess\Details.cshtml" />
-    <Content Include="Views\Companiess\Edit.cshtml" />
-    <Content Include="Views\Companiess\Index.cshtml" />
+    <Content Include="Views\Companiesss\Create.cshtml" />
+    <Content Include="Views\Companiesss\Delete.cshtml" />
+    <Content Include="Views\Companiesss\Details.cshtml" />
+    <Content Include="Views\Companiesss\Edit.cshtml" />
+    <Content Include="Views\Companiesss\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

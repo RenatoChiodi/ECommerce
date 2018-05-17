@@ -33,19 +33,22 @@ namespace ECommerce.Models
         public string Address { get; set; }
 
        
-        [Display(Name = "Nome")]
+        [Display(Name = "Imagem")]
         [DataType(DataType.ImageUrl)]
         public string Logo { get; set; }
+
+        
+        [Required(ErrorMessage = "O Campo Departamento é Obrigatório!")]
+        [Display(Name = "Departamento")]
+        public int DepartamentsId { get; set; }
 
         [Required(ErrorMessage = "O Campo Cidade é Obrigatório!")]
         [Display(Name = "Cidade")]
         public int CityId { get; set; }
 
-        [Required(ErrorMessage = "O Campo Departamento é Obrigatório!")]
-        [Display(Name = "Departamento")]
-        public int DepartamentsId { get; set; }
-
         public virtual Departaments Departaments { get; set; }
         public virtual City Cities { get; set; }
+       
+       
     }
 }

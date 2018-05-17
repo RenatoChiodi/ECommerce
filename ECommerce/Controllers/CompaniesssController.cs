@@ -1,23 +1,37 @@
-﻿using ECommerce.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using ECommerce.Classes;
+using ECommerce.Models;
 
 namespace ECommerce.Controllers
 {
-    public class CompaniessController : Controller
+    public class CompaniesssController : Controller
     {
         private EcommerceContext db = new EcommerceContext();
 
-        // GET: Companiess
+        //controle da list view em cascata
+
+            public JsonResult GetCities(int departamentId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var cities = db.Cities.Where(m => m.DepartamentsId == departamentId);
+                return Json(cities);
+        }
+
+        // GET: Companiesss
         public ActionResult Index()
         {
             var companies = db.Companies.Include(c => c.Cities).Include(c => c.Departaments);
             return View(companies.ToList());
         }
 
-        // GET: Companiess/Details/5
+        // GET: Companiesss/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -32,20 +46,20 @@ namespace ECommerce.Controllers
             return View(company);
         }
 
-        // GET: Companiess/Create
+        // GET: Companiesss/Create
         public ActionResult Create()
         {
-            ViewBag.CityId = new SelectList(db.Cities, "CityId", "Name");
-            ViewBag.DepartamentsId = new SelectList(db.Departaments, "DepartamentsId", "Name");
+            ViewBag.CityId = new SelectList(CombosHelper.GetCities(), "CityId", "Name");
+            ViewBag.DepartamentsId = new SelectList(CombosHelper.GetDepartaments(), "DepartamentsId", "Name");
             return View();
         }
 
-        // POST: Companiess/Create
+        // POST: Companiesss/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CompanyId,Name,Phone,Address,Logo,CityId,DepartamentsId")] Company company)
+        public ActionResult Create([Bind(Include = "CompanyId,Name,Phone,Address,Logo,DepartamentsId,CityId")] Company company)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +73,7 @@ namespace ECommerce.Controllers
             return View(company);
         }
 
-        // GET: Companiess/Edit/5
+        // GET: Companiesss/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -71,17 +85,17 @@ namespace ECommerce.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CityId = new SelectList(db.Cities, "CityId", "Name", company.CityId);
-            ViewBag.DepartamentsId = new SelectList(db.Departaments, "DepartamentsId", "Name", company.DepartamentsId);
+            ViewBag.CityId = new SelectList(CombosHelper.GetCities(), "CityId", "Name", company.CityId);
+            ViewBag.DepartamentsId = new SelectList(CombosHelper.GetDepartaments(), "DepartamentsId", "Name", company.DepartamentsId);
             return View(company);
         }
 
-        // POST: Companiess/Edit/5
+        // POST: Companiesss/Edit/5
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CompanyId,Name,Phone,Address,Logo,CityId,DepartamentsId")] Company company)
+        public ActionResult Edit([Bind(Include = "CompanyId,Name,Phone,Address,Logo,DepartamentsId,CityId")] Company company)
         {
             if (ModelState.IsValid)
             {
@@ -89,12 +103,12 @@ namespace ECommerce.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CityId = new SelectList(db.Cities, "CityId", "Name", company.CityId);
-            ViewBag.DepartamentsId = new SelectList(db.Departaments, "DepartamentsId", "Name", company.DepartamentsId);
+            ViewBag.CityId = new SelectList(CombosHelper.GetCities(), "CityId", "Name", company.CityId);
+            ViewBag.DepartamentsId = new SelectList(CombosHelper.GetDepartaments(), "DepartamentsId", "Name", company.DepartamentsId);
             return View(company);
         }
 
-        // GET: Companiess/Delete/5
+        // GET: Companiesss/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -109,7 +123,7 @@ namespace ECommerce.Controllers
             return View(company);
         }
 
-        // POST: Companiess/Delete/5
+        // POST: Companiesss/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
