@@ -63,6 +63,7 @@ namespace ECommerce.Controllers
             {
                 db.Users.Add(user);
                 db.SaveChanges();
+                UserHelper.CreateUserASP(user.UserName,"User");
 
                 //tratamento de imagem
                 if (user.PhotoFile != null)
