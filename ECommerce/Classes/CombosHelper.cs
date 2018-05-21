@@ -50,6 +50,28 @@ namespace ECommerce.Classes
 
 
         }
+
+        public static List<Company> GetCompanys()
+        {
+
+
+            //Adiciona a menssagem selecine um departamento
+            var comp = db.Companies.ToList();
+            comp.Add(new Company
+            {
+                //se tentar salvar sem selecioner irá retornar 0
+                CompanyId = 0,
+                Name = "[ Selecione uma Companhia]"
+
+            });
+
+            //Ordena os campos do ComboBox
+            return comp = comp.OrderBy(c => c.Name).ToList();
+
+
+
+        }
+
         public void Dispose()
         {
             db.Dispose();
