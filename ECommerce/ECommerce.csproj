@@ -200,6 +200,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Classes\CombosHelper.cs" />
+    <Compile Include="Classes\FilesHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
     <Compile Include="Controllers\CompaniesssController.cs" />
@@ -297,6 +298,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Logos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
