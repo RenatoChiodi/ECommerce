@@ -20,6 +20,13 @@ namespace ECommerce.Controllers
             return Json(cities);
         }
 
+        public JsonResult GetCompanies(int cityId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var compamies = db.Companies.Where(m => m.CityId == cityId);
+            return Json(compamies);
+        }
+
         // GET: Users
         public ActionResult Index()
         {
@@ -136,8 +143,17 @@ namespace ECommerce.Controllers
                     }
 
                 }
+
+                var db2 = new EcommerceContext();
+                var currentUser = db2.Users.Find(user.UserId);
+                if(currentUser.UserName != user.UserName)
+                {
+                    UserHelper.UpdateUserName(currentUser.UserName, user.UserName);
+                }
+                db2.Dispose();
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
+                
                 return RedirectToAction("Index");
             }
             ViewBag.CityId = new SelectList(CombosHelper.GetCities(), "CityId", "Name", user.CityId);
@@ -171,6 +187,7 @@ namespace ECommerce.Controllers
             User user = db.Users.Find(id);
             db.Users.Remove(user);
             db.SaveChanges();
+            UserHelper.DeleteUser(user.UserName);
             return RedirectToAction("Index");
         }
 

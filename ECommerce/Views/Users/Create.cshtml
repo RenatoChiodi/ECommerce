@@ -103,7 +103,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-    <script type="text/javascript">
+<script type="text/javascript">
         $(document).ready(function () {
             $("#DepartamentsId").change(function () {
                 $("#CityId").empty();
@@ -127,8 +127,35 @@
                         alert('Falha ao buscar cidades. ' + ex);
                     }
                 });
+
                 return false;
             })
-        });
-    </script>
+    });
+    $(document).ready(function () {
+     $("#CityId").change(function () {
+                     $("#CompanyId").empty();
+                     $("#CompanyId").append('<option value="0">[Selecione uma Companhia..]</option> ');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetCompanies")',
+                    dataType: 'json',
+                    data: { cityId: $("#CityId").val() },
+                    success: function (data) {
+                        $.each(data, function (i, data) {
+                            $("#CompanyId").append('<option value="'
+                                + data.CompanyId + '">'
+                                + data.Name + '</option>'
+                            );
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Falha ao buscar Companhias. ' + ex);
+                    }
+                     });
+                return false;
+        })
+    });
+</script>
 }

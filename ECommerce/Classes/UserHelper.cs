@@ -2,10 +2,8 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Configuration;
 
 namespace ECommerce.Classes
@@ -25,15 +23,46 @@ namespace ECommerce.Classes
             }
         }
 
+        //DELETE USERS
+        public static bool DeleteUser(string userName)
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
+            var userASP = userManager.FindByEmail(userName);
+            if (userASP == null)
+            {
+                return false;
+            }
+
+            var response = userManager.Delete(userASP);
+            return response.Succeeded;
+        }
+
+        //UPDATE USERS
+        public static bool UpdateUserName(string currentUserName, string newUserName)
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
+            var userASP = userManager.FindByEmail(currentUserName);
+            if (userASP == null)
+            {
+                return false;
+            }
+
+            userASP.UserName = newUserName;
+            userASP.Email = newUserName;
+            var response = userManager.Update(userASP);
+            return response.Succeeded;
+        }
+
+
         public static void CheckSuperUser()
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
-            var email = "renatod.chiodi@gmail.com"; //WebConfigurationManager.AppSettings["AdminUser"];
+            var email = "renatod.chiodi@gmail.com";// WebConfigurationManager.AppSettings["AdminUser"];
             var password = "Renato123.";// WebConfigurationManager.AppSettings["AdminPassword"];
             var userASP = userManager.FindByName(email);
             if(userASP == null)
             {
-                CreateUserASP(email, "Admin");
+                CreateUserASP(email,"Admin",password);
                 return;
             }
 
@@ -50,6 +79,19 @@ namespace ECommerce.Classes
             };
 
             userManager.Create(userASP, email);
+            userManager.AddToRole(userASP.Id, roleName);
+        }
+
+        public static void CreateUserASP(string email, string roleName, String password)
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
+            var userASP = new ApplicationUser
+            {
+                Email = email,
+                UserName = email,
+            };
+
+            userManager.Create(userASP, password);
             userManager.AddToRole(userASP.Id, roleName);
         }
 
