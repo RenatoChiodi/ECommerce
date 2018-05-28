@@ -52,7 +52,7 @@ namespace ECommerce.Models
         public virtual Departaments Departaments { get; set; }
         public virtual City Cities { get; set; }
         public virtual ICollection<User> User { get; set; }
-
-
+        public virtual ICollection<Category> Category { get; set; }
+        
     }
 }

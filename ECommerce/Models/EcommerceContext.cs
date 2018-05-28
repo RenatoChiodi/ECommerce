@@ -23,5 +23,7 @@ namespace ECommerce.Models
 
         public System.Data.Entity.DbSet<ECommerce.Models.User> Users { get; set; }
         public object TaxPaers { get; internal set; }
+
+        public System.Data.Entity.DbSet<ECommerce.Models.Category> Categories { get; set; }
     }
 }
