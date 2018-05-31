@@ -53,6 +53,7 @@ namespace ECommerce.Models
         public virtual City Cities { get; set; }
         public virtual ICollection<User> User { get; set; }
         public virtual ICollection<Category> Category { get; set; }
-        
+        public virtual ICollection<Tax> Taxes { get; set; }
+
     }
 }
