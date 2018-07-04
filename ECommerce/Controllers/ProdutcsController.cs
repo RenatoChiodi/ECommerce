@@ -121,8 +121,8 @@ namespace ECommerce.Controllers
                   
 
 
-            ViewBag.CategoryId = new SelectList(CombosHelper.GetCategories(produtc.CompanyId), "CategoryId", "Description", produtc.CategoryId);
-            ViewBag.TaxId = new SelectList(CombosHelper.GetTaxes(produtc .CompanyId), "TaxId", "Description", produtc.TaxId);
+            ViewBag.CategoryId = new SelectList(CombosHelper.GetCategories(produtc.CompanyId), "CategoryId", "Description", produtc.ProductId);
+            ViewBag.TaxId = new SelectList(CombosHelper.GetTaxes(produtc .CompanyId), "TaxId", "Description", produtc.ProductId);
             return View(produtc);
         }
 
@@ -156,8 +156,8 @@ namespace ECommerce.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryId = new SelectList(CombosHelper.GetCategories(produtc.CompanyId), "CategoryId", "Description", produtc.CategoryId);
-            ViewBag.TaxId = new SelectList(CombosHelper.GetTaxes(produtc.CompanyId), "TaxId", "Description", produtc.TaxId);
+            ViewBag.CategoryId = new SelectList(CombosHelper.GetCategories(produtc.CompanyId), "CategoryId", "Description", produtc.ProductId);
+            ViewBag.TaxId = new SelectList(CombosHelper.GetTaxes(produtc.CompanyId), "TaxId", "Description", produtc.ProductId);
             return View(produtc);
         }
 
