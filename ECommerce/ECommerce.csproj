@@ -204,6 +204,7 @@
     <Compile Include="Controllers\DepartamentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProdutcsController.cs" />
     <Compile Include="Controllers\TaxesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -213,6 +214,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\City.cs" />
+    <Compile Include="Models\Produtc.cs" />
     <Compile Include="Models\Tax.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Departaments.cs" />
@@ -314,10 +316,16 @@
     <Content Include="Views\Taxes\Details.cshtml" />
     <Content Include="Views\Taxes\Edit.cshtml" />
     <Content Include="Views\Taxes\Index.cshtml" />
+    <Content Include="Views\Produtcs\Create.cshtml" />
+    <Content Include="Views\Produtcs\Delete.cshtml" />
+    <Content Include="Views\Produtcs\Details.cshtml" />
+    <Content Include="Views\Produtcs\Edit.cshtml" />
+    <Content Include="Views\Produtcs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Logos\" />
+    <Folder Include="Content\Products\" />
     <Folder Include="Content\Users\" />
   </ItemGroup>
   <ItemGroup>

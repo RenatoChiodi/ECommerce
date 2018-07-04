@@ -72,6 +72,47 @@ namespace ECommerce.Classes
 
         }
 
+        public static List<Category> GetCategories(int companyId)
+        {
+
+
+            //Adiciona a menssagem selecine um departamento
+            var cat = db.Categories.Where(c=> c.CompanyId==companyId).ToList();
+            cat.Add(new Category
+            {
+                //se tentar salvar sem selecioner irá retornar 0
+               CategoryId = 0,
+               Description = "[ Selecione uma Categoria]"
+
+            });
+
+            //Ordena os campos do ComboBox
+            return cat = cat.OrderBy(d => d.Description).ToList();
+
+        }
+
+        public static List<Tax> GetTaxes(int companyId)
+        {
+
+
+            //Adiciona a menssagem selecine um departamento
+            var tax = db.Taxes.Where(c => c.CompanyId == companyId).ToList();
+            tax.Add(new Tax
+            {
+                //se tentar salvar sem selecioner irá retornar 0
+                TaxId = 0,
+                Description = "[ Selecione uma Taxa]"
+
+            });
+
+            //Ordena os campos do ComboBox
+            return tax = tax.OrderBy(d => d.Description).ToList();
+
+        }
+
+
+
+
         public void Dispose()
         {
             db.Dispose();

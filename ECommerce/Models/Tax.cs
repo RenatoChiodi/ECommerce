@@ -13,7 +13,7 @@ namespace ECommerce.Models
         [Display(Name = "Taxa ID")]
         public int TaxId { get; set; }
 
-        [Display(Name = "Descrição")]
+        [Display(Name = "Imposto")]
         [MaxLength(100, ErrorMessage = "O nome nao deve conter mais que 50 caracteres!!")]
         [Required(ErrorMessage = "O Campo Categoria é Obrigatório!")]
         //[Index("Category_Description_CompanyId_Index", 2, IsUnique = true)]
@@ -32,5 +32,6 @@ namespace ECommerce.Models
         public int CompanyId { get; set; }
 
         public virtual Company Company { get; set; }
+        public virtual ICollection<Produtc> Product { get; set; }
     }
 }
